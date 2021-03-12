@@ -1,4 +1,6 @@
 ﻿using Business.Abstact;
+using Business.Constans;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -17,24 +19,42 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public List<Car> GetAll()
+        public IResult Add(Car car)
         {
-            return _carDal.GetAll();
+            if (car.DailyPrice < 5)
+            {
+                return new ErrorResult(Messages.ProductNameInvalid);
+            }
+            //Business code
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarAdded);
         }
 
-        public List<Car> GetAllByCategoryId(int id)
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll(p => p.BrandId == id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarListed);
         }
 
-        public List<Car> GetByUnitPrice(int min, int max)
+        public IDataResult<List<Car>> GetAllByCategoryId(int id)
         {
-            return _carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
         }
 
-        public List<CarDetailDto> GetProductDetails()
+        public IDataResult<Car> GetById(int carId)
         {
-            return _carDal.GetProductDetails();
+            return new SuccessDataResult<Car>(_carDal.Get(p => p.CarId == carId));
         }
+
+        public IDataResult<List<Car>> GetByUnitPrice(int min, int max)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetProductDetails()
+        {
+            return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetProductDetails());
+        }
+
+        
     }
 }
