@@ -9,7 +9,25 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarDetails();            
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            var result = rentalManager.GetRentalDetails();
+
+            if (result.Success == true)
+            {
+                foreach (var rental in result.Data)
+                {
+                    Console.WriteLine("RentId"+rental.RentId+" Name:" + rental.UserFirstName + "Car:" + " Price:" + rental.DailyPrice + "Date time" + rental.RentDate);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
+            //CarDetails();            
             //CarTest();
 
         }
