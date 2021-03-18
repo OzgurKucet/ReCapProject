@@ -15,7 +15,7 @@ namespace Business.Abstact
         IDataResult<List<CarDetailDto>> GetProductDetails();
         IDataResult<Car> GetById(int carId);
         IResult Add(Car car);
-
+        IResult Update(Car car);
 
     }
 }

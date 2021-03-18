@@ -26,10 +26,10 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            
-            //ValidationTool.Validate(new CarValidator(), car);
-
+            //Bir arabanın en fazla 5 resmi olabilir.            
             //Business code
+
+            
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
@@ -59,6 +59,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>( _carDal.GetProductDetails());
         }
 
-        
+        [ValidationAspect(typeof(CarValidator))]
+        public IResult Update(Car car)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
