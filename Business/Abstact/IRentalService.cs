@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Results;
+﻿/*using Core.Utilities.Results;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -10,4 +10,4 @@ namespace Business.Abstact
     {
         IDataResult<List<RentalDetailDto>> GetRentalDetails();
     }
-}
+}*/

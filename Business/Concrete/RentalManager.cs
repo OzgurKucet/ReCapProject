@@ -1,4 +1,4 @@
-﻿using Business.Abstact;
+﻿/*using Business.Abstact;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.DTOs;
@@ -23,4 +23,4 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
     }
-}
+}*/
